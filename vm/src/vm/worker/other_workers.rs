@@ -54,7 +54,7 @@ pub type DoneWorker<'a> = Worker<'a, DoneState>;
 
 impl<'a> DoneWorker<'a> {
     pub fn drop_memory(&mut self, mem: &mut Memory, chans: &mut Channels) -> Result<()> {
-        println!("Dropped memory: {:?}", self.id);
+//        println!("Dropped memory: {:?}", self.id);
         for a in ::std::mem::replace(&mut self.allocated, Vec::new()) {
             match a {
                 Allocated::Chan(c) => chans.free_channels(Some(c))?,

@@ -171,9 +171,9 @@ impl<'a> VM<'a> {
         if self.par.is_empty() && self.ready.is_empty() && self.channels.all_done() {
             Ok(())
         } else {
-            println!("Par: {:?}", self.par);
-            println!("Ready: {:?}", self.ready);
-            println!("Channels: {:?}", self.channels);
+//            println!("Par: {:?}", self.par);
+//            println!("Ready: {:?}", self.ready);
+//            println!("Channels: {:?}", self.channels);
             Err(VMError::ImproperEndState)
         }
     }

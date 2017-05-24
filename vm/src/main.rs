@@ -5,7 +5,7 @@ extern crate uuid;
 use clap::{Arg, App};
 
 use std::fs::File;
-use std::io::{self, Write, Read};
+use std::io::{Read};
 use std::path::PathBuf;
 
 mod types;
@@ -95,7 +95,7 @@ fn run_main() -> Result<()> {
 
     let mut i = 0;
     for op in &program_data.0 {
-        println!("{}: {:?}", i, op); i += 1
+//        println!("{}: {:?}", i, op); i += 1
     }
 
     let program = BinaryProgramViewer::from(&program_data);

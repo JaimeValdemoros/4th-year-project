@@ -49,7 +49,7 @@ impl<'a> ReadyWorker<'a> {
         self.stack.push(arr_pointer as StackVal)?;
         self.allocated
             .push(Allocated::ChannArr(arr_pointer, channels));
-        println!("Worker allocated: {:?}", self.id);
+//        println!("Worker allocated: {:?}", self.id);
         Ok(())
     }
 
@@ -69,7 +69,7 @@ impl<'a> ReadyWorker<'a> {
 
         loop {
             let alt_op = self.run_until_proc(mem)?;
-            println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, alt_op, self.stack);
+//            println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, alt_op, self.stack);
             match alt_op {
 
                 ProcOp::AltBranch(n) => {
@@ -135,7 +135,7 @@ impl<'a> ReadyWorker<'a> {
         let mut par_state = ParState::new();
         loop {
             let par_op = self.run_until_proc(mem)?;
-            println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, par_op, self.stack);
+//            println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, par_op, self.stack);
             match par_op {
                 ProcOp::ParBranch => {
                     let pos = self.stack.pop(self.program.get_pos())? as ProgPos;
@@ -174,7 +174,7 @@ impl<'a> ReadyWorker<'a> {
             self.stack.push(v)?
         }
         let proc_op = self.run_until_proc(mem)?; // run until we get a procOp
-        println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, proc_op, self.stack);
+//        println!("Id: {:?} Op: {:?}, Stack: {:?}", self.id, proc_op, self.stack);
         match proc_op {
             ProcOp::Stop => panic!("Program called STOP"),
             ProcOp::NewArr => self.new_array(mem).map(|()| WorkerWrapper::Ready(self)),

@@ -197,8 +197,8 @@ impl<'a> Channels<'a> {
             .channels()
             .into_iter()
             .find(|&ch| !self.channels[ch].is_empty());
-        println!("ALT list; {:?}", a_worker.channels());
-        println!("ALT search; {:?}", chan_search);
+//        println!("ALT list; {:?}", a_worker.channels());
+//        println!("ALT search; {:?}", chan_search);
         if let Some(ch) = chan_search {
             self.channels[ch].read_alt(ch, a_worker).map(Some)
         } else {
@@ -222,7 +222,7 @@ impl<'a> Channels<'a> {
                  w_worker: WritingWorker<'a>)
                  -> Result<Option<(ReadyWorker<'a>, ReadyWorker<'a>)>> {
         let channel_pos = w_worker.state.channel;
-        println!("Writing to channel {:?}", channel_pos);
+//        println!("Writing to channel {:?}", channel_pos);
         let channel_state = self.channels[channel_pos].state.take();
         match channel_state {
             ChannelState::Empty => {
