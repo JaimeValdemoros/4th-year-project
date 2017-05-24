@@ -9,3 +9,5 @@ Compile using 'cd tests; stack exec compiler-exe write <input-file> <output-file
 
 Run files using
   cargo run -- -m <memory-size> -p <input-file>
+
+Runs about 2750 LOC for compiler and 1850 LOC for virtual machine
