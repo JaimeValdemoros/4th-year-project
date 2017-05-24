@@ -228,7 +228,7 @@ stConvert _ _ U.CNot _ = return $ simple NOT
 stConvert _ _ U.CCompGT _ = return $ simple Export.GT
 stConvert _ _ (U.CLit lit) _ = return $ simple (Lit $ convert_literal lit)
 stConvert c l (U.CIf t_branch f_branch) elab = do fs <- stConvert c l f_branch elab
-                                                  ts <- stConversut c l t_branch elab
+                                                  ts <- stConvert c l t_branch elab
                                                   t_label <- freshLabel
                                                   exit_label <- freshLabel
                                                   return $ (cjump t_label)
