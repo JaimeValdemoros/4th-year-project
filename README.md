@@ -13,7 +13,9 @@ Run
 "RUSTFLAGS="$RUSTFLAGS -A warnings"
 
 in the vm directory to build the vm
+
 Example files in /tests; files without suffix are inputs, for convention I have used '.occ' as a suffix for compiled code.
+
 Compile using 'cd tests; stack exec compiler-exe write <input-file> <output-file>'
 
 Run files using
