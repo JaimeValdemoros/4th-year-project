@@ -1,0 +1,5 @@
+PROC main()
+  SEQ
+    screen ! 'c'
+    screen ! 'h'
+    main()

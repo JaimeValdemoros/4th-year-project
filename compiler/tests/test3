@@ -1,0 +1,5 @@
+PROC main()
+  SEQ i FOR 48 TO 58
+    SEQ
+      screen ! i
+      screen ! '&'

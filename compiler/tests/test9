@@ -1,0 +1,5 @@
+PROC main()
+  INT CHAN chans[10]
+    PAR
+      screen ! 50
+      screen ! 60

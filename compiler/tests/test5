@@ -1,0 +1,5 @@
+PROC main()
+  INT a[5]
+    SEQ
+      a[0] = 50
+      screen ! a[0]

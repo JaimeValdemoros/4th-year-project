@@ -1,0 +1,11 @@
+[package]
+name = "occam-vm"
+version = "0.1.0"
+authors = ["Jaime Valdemoros <jaimevg1123@gmail.com>"]
+
+[dependencies]
+uuid = { version = "0.4", features = ["v4"] }
+lazy_static = "0.2"
+clap = "*"
+itertools = "*"
+byteorder = "*"

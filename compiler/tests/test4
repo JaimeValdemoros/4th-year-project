@@ -1,0 +1,5 @@
+PROC main()
+  SEQ i FOR 48 to 58
+    INT a
+      SEQ
+        screen ! i

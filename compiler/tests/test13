@@ -1,0 +1,7 @@
+PROC main()
+  INT CHAN chans[10]
+    PAR
+      chans[5] ! 50
+      ALT i FOR 0 TO 9
+        True & chans[i] ? x
+          screen ! x

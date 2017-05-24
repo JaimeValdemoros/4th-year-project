@@ -1,0 +1,7 @@
+PROC main()
+  SEQ i FOR 50 to 60
+    INT a[i], INT j
+      SEQ
+        j = 0
+        a[j] = i
+        screen ! a[j]

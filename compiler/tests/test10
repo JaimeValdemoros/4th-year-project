@@ -1,0 +1,8 @@
+PROC main()
+  INT CHAN chans[10]
+    PAR
+      chans[5] ! 50
+      INT v
+        SEQ
+          chans[5] ? v
+          screen ! v

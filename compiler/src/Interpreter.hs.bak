@@ -1,0 +1,45 @@
+{-#LANGUAGE GADTs, DataKinds, PolyKinds, TypeInType, TypeOperators, TypeFamilies #-}
+
+module Interpreter where
+
+import Data.Kind (Type)
+
+import Types
+import Expressions
+import UnboundedStack
+
+shift :: Int -> Int -> Int
+shift n 0 = n
+shift n k = if k>0 then shift (2 * n) (k - 1) else shift (div n 2) (k + 1)
+
+data Variables :: [TYPE] -> Type where
+    NiLVars :: Variables '[]
+    AddVar :: Literal t -> Variables ts -> Variables (t ': ts)
+
+data Stack :: [StackEntry] -> Type where
+    NilStack :: Stack '[]
+    (:::) :: Literal t -> Stack ts -> Stack (Val t ': ts)
+    (::.) :: VarRef n -> Stack ts -> Stack (Ref n ': ts)
+
+infixr 5 :::
+infixr 5 ::.
+
+interpret :: StackCode ctx '[] '[Val t] -> Variables ctx -> Literal t
+interpret c ctx = (\(a ::: NilStack) -> a) $ worker c ctx NilStack where
+    worker :: StackCode vs xs ys -> Variables vs -> Stack xs -> Stack ys
+    worker (c1 :. c2) vs s = worker c2 vs . worker c1 vs $ s
+    worker CPlus vs (IntLit n ::: IntLit m ::: s) = IntLit (n+m) ::: s
+    worker CMul vs (IntLit n ::: IntLit m ::: s) = IntLit (n*m) ::: s
+    worker CDiv vs (IntLit n ::: IntLit m ::: s) = IntLit (div n m) ::: s
+    worker CMod vs (IntLit n ::: IntLit m ::: s) = IntLit (mod n m) ::: s
+    worker CNeg vs (IntLit n ::: s) = IntLit (-n) ::: s
+    worker CEq vs (l1 ::: l2 ::: s) = BoolLit (l1 == l2) ::: s
+    worker CAnd vs (BoolLit b1 ::: BoolLit b2 ::: s) = BoolLit (b1 && b2) ::: s
+    worker COr vs (BoolLit b1 ::: BoolLit b2 ::: s) = BoolLit (b1 || b2) ::: s
+    worker CNot vs (BoolLit b ::: s) = BoolLit (not b) ::: s
+    worker CCompGT vs (IntLit n1 ::: IntLit n2 ::: s) = (BoolLit $ n1 > n2) ::: s
+    worker (CLit l) vs s = l ::: s
+    worker CLookup (AddVar l _) (Last ::. s) = l ::: s
+    worker CLookup (AddVar _ ls) (Prev n ::. s) = worker CLookup ls (n ::. s)
+    worker (CIf c1 c2) vs (BoolLit b ::: s) = if b then worker c1 vs s else worker c2 vs s
+    worker CShift vs (IntLit n ::: IntLit m ::: s) = IntLit (shift n m) ::: s
