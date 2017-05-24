@@ -9,5 +9,6 @@ Compile using 'cd tests; stack exec compiler-exe write <input-file> <output-file
 
 Run files using
   cargo run -- -m <memory-size> -p <input-file>
+  Lots of debug messages are enabled so you might have to go looking for 'screen-write' events in between.
 
 Runs about 2750 LOC for compiler and 1850 LOC for virtual machine
