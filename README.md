@@ -21,3 +21,5 @@ Run files using
   Lots of debug messages are enabled so you might have to go looking for 'screen-write' events in between.
 
 Runs about 2750 LOC for compiler and 1850 LOC for virtual machine
+
+While the project works as is, it still requires a lot of cleanup in terms of dead code, better messages and far more commenting which I will provide over time.
